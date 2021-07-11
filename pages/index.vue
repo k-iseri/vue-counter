@@ -1,12 +1,15 @@
 <template>
   <div>
     <input v-model="inputString" />
-    <div>文字列：{{ outputString }}</div>
     <div>
-      <button @click="increment">加算</button>
+      <label for="check">下線を表示する</label>
+      <input type="checkbox" v-model="ifUnderLine" id="check" />
       <button @click="reset">リセット</button>
     </div>
-    {{ stringx2 }}
+    <br />
+    <span :class="{ underline: ifUnderLine }" class="item">{{
+      inputString
+    }}</span>
   </div>
 </template>
 
@@ -15,24 +18,24 @@ export default {
   data() {
     return {
       inputString: '',
-      outputString: '',
+      ifUnderLine: false,
     }
   },
-  computed: {
-    stringx2: function() {
-      /* 常にcountの2倍を返す */
-      return this.outputString + this.outputString
-    },
-  },
   methods: {
-    increment: function() {
-      /* 呼ばれたらcountに1を足す */
-      this.count++
-      this.outputString += this.inputString
-    },
     reset: function() {
-      this.outputString = ''
+      this.inputString = ''
+      this.ifUnderLine = false
     },
   },
 }
 </script>
+
+<style scoped>
+.underline {
+  text-decoration: underline;
+}
+
+.item {
+  font-size: 2rem;
+}
+</style>
