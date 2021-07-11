@@ -1,15 +1,11 @@
 <template>
   <div>
-    <div>
-      カウント：{{ count }}
-    </div>
+    <div>カウント：{{ count }}</div>
     <div>
       <button @click="increment">加算</button>
       <button @click="reset">リセット</button>
     </div>
-    <div>
-      カウントx2：{{ countx2 }}
-    </div>
+    <div>カウントx2：{{ countx2 }}</div>
   </div>
 </template>
 
@@ -17,21 +13,25 @@
 export default {
   data() {
     return {
-      count: 0
+      /* 変数を用意する。初期値は0 */
+      count: 0,
     }
   },
   computed: {
     countx2: function() {
-      return this.count * 2;
-    }
+      /* 常にcountの2倍を返す */
+      return this.count * 2
+    },
   },
   methods: {
-    increment : function() {
-      this.count++;
+    increment: function() {
+      /* 呼ばれたらcountに1を足す */
+      this.count++
     },
     reset: function() {
-      this.count = 0;
-    }
-  }  
+      /* 呼ばれたらcountに0を代入 */
+      this.count = 0
+    },
+  },
 }
 </script>
