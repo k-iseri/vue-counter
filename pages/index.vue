@@ -31,7 +31,7 @@ export default {
       this.outputString += this.inputString
     },
     reset: function() {
-      this.inputString = ''
+      this.outputString = ''
     },
   },
 }
