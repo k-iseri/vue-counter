@@ -1,11 +1,12 @@
 <template>
   <div>
-    <div>カウント：{{ count }}</div>
+    <input v-model="inputString" />
+    <div>文字列：{{ outputString }}</div>
     <div>
       <button @click="increment">加算</button>
       <button @click="reset">リセット</button>
     </div>
-    <div>カウントx2：{{ countx2 }}</div>
+    {{ stringx2 }}
   </div>
 </template>
 
@@ -13,24 +14,24 @@
 export default {
   data() {
     return {
-      /* 変数を用意する。初期値は0 */
-      count: 0,
+      inputString: '',
+      outputString: '',
     }
   },
   computed: {
-    countx2: function() {
+    stringx2: function() {
       /* 常にcountの2倍を返す */
-      return this.count * 2
+      return this.outputString + this.outputString
     },
   },
   methods: {
     increment: function() {
       /* 呼ばれたらcountに1を足す */
       this.count++
+      this.outputString += this.inputString
     },
     reset: function() {
-      /* 呼ばれたらcountに0を代入 */
-      this.count = 0
+      this.inputString = ''
     },
   },
 }
