@@ -1,13 +1,14 @@
 <template>
   <div>
-    <input v-model="inputString" />
+    <input v-model="inputString" placeholder="文字を入力してください" />
+    <button @click="reset">リセット</button>
     <div>
       <label for="check">下線を表示する</label>
-      <input type="checkbox" v-model="ifUnderLine" id="check" />
-      <button @click="reset">リセット</button>
+      <input type="checkbox" v-model="isChecked" id="check" />
+      <span v-if="isChecked" class="checkSpan">チェック済</span>
     </div>
     <br />
-    <span :class="{ underline: ifUnderLine }" class="item">{{
+    <span :class="{ underline: isChecked }" class="item">{{
       inputString
     }}</span>
   </div>
@@ -18,13 +19,12 @@ export default {
   data() {
     return {
       inputString: '',
-      ifUnderLine: false,
+      isChecked: false,
     }
   },
   methods: {
     reset: function() {
       this.inputString = ''
-      this.ifUnderLine = false
     },
   },
 }
@@ -33,6 +33,10 @@ export default {
 <style scoped>
 .underline {
   text-decoration: underline;
+}
+
+.checkSpan {
+  color: #636363;
 }
 
 .item {
