@@ -1,16 +1,15 @@
 <template>
   <div>
-    <input v-model="inputString" placeholder="文字を入力してください" />
+    <h1>Todoリストメモ</h1>
+    <input v-model="inputString" placeholder="予定を入力してください" />
+    <button @click="addItem">追加</button>
+    <ul>
+      <li v-for="(todo, index) in todoList" :key="index">
+        {{ todo }}
+      </li>
+    </ul>
     <button @click="reset">リセット</button>
-    <div>
-      <label for="check">下線を表示する</label>
-      <input type="checkbox" v-model="isChecked" id="check" />
-      <span v-if="isChecked" class="checkSpan">チェック済</span>
-    </div>
-    <br />
-    <span :class="{ underline: isChecked }" class="item">{{
-      inputString
-    }}</span>
+    リロードすると最初の状態に戻ります
   </div>
 </template>
 
@@ -19,12 +18,18 @@ export default {
   data() {
     return {
       inputString: '',
-      isChecked: false,
+      todoList: ['ラジオ体操', '掃除', '朝食'],
     }
   },
   methods: {
+    addItem: function() {
+      if (this.inputString) {
+        this.todoList.push(this.inputString)
+        this.inputString = ''
+      }
+    },
     reset: function() {
-      this.inputString = ''
+      this.todoList = []
     },
   },
 }
