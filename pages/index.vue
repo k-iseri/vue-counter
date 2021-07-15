@@ -1,50 +1,34 @@
 <template>
-  <div>
-    <h1>Todoリストメモ</h1>
-    <input v-model="inputString" placeholder="予定を入力してください" />
-    <button @click="addItem">追加</button>
-    <ul>
-      <li v-for="(todo, index) in todoList" :key="index">
-        {{ todo }}
-      </li>
-    </ul>
-    <button @click="reset">リセット</button>
-    リロードすると最初の状態に戻ります
+  <div class="main">
+    <NuxtLogo class="logo" />
+    <Greeting /><!-- Hello World!! -->
+    <Greeting :text="displayText" /><!-- こんにちは -->
+    <Greeting text="你好" />
+    <nuxt-link to="page2">2ページへ</nuxt-link>
   </div>
 </template>
 
 <script>
+import NuxtLogo from '~/components/NuxtLogo.vue'
+import Greeting from '~/components/Greeting.vue'
+
 export default {
+  components: { NuxtLogo, Greeting },
   data() {
     return {
-      inputString: '',
-      todoList: ['ラジオ体操', '掃除', '朝食'],
+      displayText: 'こんにちは',
     }
-  },
-  methods: {
-    addItem: function() {
-      if (this.inputString) {
-        this.todoList.push(this.inputString)
-        this.inputString = ''
-      }
-    },
-    reset: function() {
-      this.todoList = []
-    },
   },
 }
 </script>
 
 <style scoped>
-.underline {
-  text-decoration: underline;
+.main {
+  text-align: center;
 }
 
-.checkSpan {
-  color: #636363;
-}
-
-.item {
-  font-size: 2rem;
+.logo {
+  margin-top: 32px;
+  margin-bottom: 32px;
 }
 </style>
