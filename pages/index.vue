@@ -1,28 +1,41 @@
 <template>
-  <div class="main">
-    <NuxtLogo class="logo" />
-    <Greeting /><!-- Hello World!! -->
-    <Greeting :text="displayText" /><!-- こんにちは -->
-    <Greeting text="你好" />
-    <nuxt-link to="page2">2ページへ</nuxt-link>
+  <div id="area">
+    <h1>タスクリスト</h1>
+    <div class="main">
+      <input v-model="inputTask" /><button @click="addTask">追加</button>
+    </div>
+    <div v-for="(task, index) in taskList" :key="index">
+      <TaskView :task="task" />
+    </div>
   </div>
 </template>
 
 <script>
-import NuxtLogo from '~/components/NuxtLogo.vue'
-import Greeting from '~/components/Greeting.vue'
+import TaskView from '~/components/TaskView.vue'
 
 export default {
-  components: { NuxtLogo, Greeting },
+  components: { TaskView },
   data() {
     return {
-      displayText: 'こんにちは',
+      inputTask: '',
+      taskList: [],
     }
+  },
+  methods: {
+    addTask: function() {
+      this.taskList.push(this.inputTask)
+      this.inputTask = ''
+    },
   },
 }
 </script>
 
 <style scoped>
+#area {
+  width: 320px;
+  margin: 0 auto;
+}
+
 .main {
   text-align: center;
 }
